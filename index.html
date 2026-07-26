@@ -487,10 +487,17 @@ class Component extends DCLogic {
       );
     });
 
-    const btnStyle =
-      'font-family:var(--font-heading); font-weight:800; font-size:clamp(14px,3.4vw,16px);' +
-      'background:transparent; color:var(--color-text); border:2px solid var(--color-divider);' +
-      'padding:10px 16px; cursor:pointer; min-width:48px;';
+    const btnStyle = {
+      fontFamily: 'var(--font-heading)',
+      fontWeight: 800,
+      fontSize: 'clamp(14px,3.4vw,16px)',
+      background: 'transparent',
+      color: 'var(--color-text)',
+      border: '2px solid var(--color-divider)',
+      padding: '10px 16px',
+      cursor: 'pointer',
+      minWidth: '48px',
+    };
 
     return React.createElement(
       'div',
