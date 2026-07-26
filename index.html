@@ -63,6 +63,11 @@
     50% { transform: translateX(3px); }
     75% { transform: translateX(-2px); }
   }
+  @keyframes om-love-pop {
+    0%   { transform: scale(.55); opacity: 0; letter-spacing: .28em; }
+    55%  { transform: scale(1.08); opacity: 1; letter-spacing: .06em; }
+    100% { transform: scale(1); opacity: 1; letter-spacing: .04em; }
+  }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: .001s !important;
@@ -105,7 +110,7 @@
         </div>
       </div>
 
-      <div style="margin-top:clamp(26px,6vw,40px); text-transform:uppercase; letter-spacing:.18em; font-size:clamp(11px,2.6vw,13px); font-weight:700; color:var(--color-neutral-600);">Tap to open ↑</div>
+      <div style="margin-top:clamp(26px,6vw,40px); text-transform:uppercase; letter-spacing:.18em; font-size:clamp(11px,2.6vw,13px); font-weight:700; color:var(--color-neutral-600);">{{ openHint }}</div>
     </button>
   </main>
   </sc-if>
@@ -211,29 +216,17 @@
       </div>
     </section>
 
-    <!-- ===== Gallery ===== -->
-    <section aria-label="A few memories" style="margin-top:clamp(52px,11vw,84px);">
+    <!-- ===== Gallery — 3D carousel of all memories ===== -->
+    <section aria-label="Our memories" style="margin-top:clamp(52px,11vw,84px);">
       <div style="display:flex; align-items:center; gap:12px; padding-bottom:14px; border-bottom:2px solid var(--color-text); text-transform:uppercase; letter-spacing:.16em; font-size:clamp(11px,2.6vw,13px); font-weight:700;">
         <span>Memories</span>
         <span style="color:var(--color-accent);">/</span>
         <span>Us</span>
       </div>
-
-      <!-- Drop your photos into assets/ as gallery-1.jpg … gallery-4.jpg -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; margin-top:clamp(18px,4vw,26px);">
-        <div style="border:2px solid var(--color-text); background:var(--color-text); overflow:hidden;">
-          <img src="assets/gallery-1.jpg" alt="{{ herName }} and {{ myName }} — memory one" loading="lazy" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .3s ease;" style-hover="transform:scale(1.04)">
-        </div>
-        <div style="border:2px solid var(--color-text); background:var(--color-text); overflow:hidden;">
-          <img src="assets/gallery-2.jpg" alt="{{ herName }} and {{ myName }} — memory two" loading="lazy" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .3s ease;" style-hover="transform:scale(1.04)">
-        </div>
-        <div style="border:2px solid var(--color-text); background:var(--color-text); overflow:hidden;">
-          <img src="assets/gallery-3.jpg" alt="{{ herName }} and {{ myName }} — memory three" loading="lazy" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .3s ease;" style-hover="transform:scale(1.04)">
-        </div>
-        <div style="border:2px solid var(--color-text); background:var(--color-text); overflow:hidden;">
-          <img src="assets/gallery-4.jpg" alt="{{ herName }} and {{ myName }} — memory four" loading="lazy" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .3s ease;" style-hover="transform:scale(1.04)">
-        </div>
-      </div>
+      <p style="margin:clamp(14px,3.5vw,20px) 0 0; font-size:clamp(14px,3.4vw,16px); line-height:1.5; color:var(--color-neutral-800); max-width:42ch;">
+        Spin through every little moment — swipe or use the arrows.
+      </p>
+      <div style="margin-top:clamp(18px,4vw,26px);">{{ carousel }}</div>
     </section>
 
     <p style="margin-top:clamp(40px,9vw,60px); font-weight:700; font-size:clamp(15px,3.6vw,18px);">No matter what, celebrating you is always special. <span style="color:var(--color-accent);">❤️</span></p>
@@ -332,7 +325,11 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:880},&quot;confettiCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:70,&quot;min&quot;:20,&quot;max&quot;:160,&quot;step&quot;:10,&quot;tsType&quot;:&quot;number&quot;,&quot;unit&quot;:&quot;pcs&quot;,&quot;section&quot;:&quot;Celebration&quot;},&quot;heartsEnabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Celebration&quot;},&quot;dodgeTries&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:4,&quot;min&quot;:1,&quot;max&quot;:8,&quot;tsType&quot;:&quot;number&quot;,&quot;unit&quot;:&quot;tries&quot;,&quot;section&quot;:&quot;No button&quot;},&quot;herName&quot;:{&quot;editor&quot;:&quot;string&quot;,&quot;default&quot;:&quot;Nadine&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Personal&quot;},&quot;myName&quot;:{&quot;editor&quot;:&quot;string&quot;,&quot;default&quot;:&quot;Ezekiel&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Personal&quot;},&quot;pickupTime&quot;:{&quot;editor&quot;:&quot;string&quot;,&quot;default&quot;:&quot;3:30 PM&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Personal&quot;},&quot;dinnerTime&quot;:{&quot;editor&quot;:&quot;string&quot;,&quot;default&quot;:&quot;8:30 PM&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Personal&quot;},&quot;privateMessage&quot;:{&quot;editor&quot;:&quot;string&quot;,&quot;default&quot;:&quot;P.S. Every plan I make somehow ends with you. This one is my favorite so far.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Personal&quot;}}">
 class Component extends DCLogic {
-  state = { screen: 'seal', opening: false, sayIdx: 0, sayFade: false, dodges: 0, noStyle: null, taunt: '' };
+  state = {
+    screen: 'seal', opening: false, openLove: false,
+    sayIdx: 0, sayFade: false, dodges: 0, noStyle: null, taunt: '',
+    carouselIdx: 0, carouselPaused: false,
+  };
 
   SAYINGS = [
     "You're my favorite hello and my hardest goodbye.",
@@ -344,9 +341,30 @@ class Component extends DCLogic {
     "No matter what, celebrating you is always special.",
   ];
 
+  GALLERY = [
+    'assets/memories/memory-01.jpg',
+    'assets/memories/memory-02.jpg',
+    'assets/memories/memory-03.png',
+    'assets/memories/memory-04.jpg',
+    'assets/memories/memory-05.jpg',
+    'assets/memories/memory-06.jpg',
+    'assets/memories/memory-07.jpg',
+    'assets/memories/memory-08.jpg',
+    'assets/memories/memory-09.jpg',
+    'assets/memories/memory-10.jpg',
+    'assets/memories/memory-11.jpg',
+    'assets/memories/memory-12.jpg',
+    'assets/memories/memory-13.jpg',
+    'assets/memories/memory-14.jpg',
+    'assets/memories/memory-15.jpg',
+    'assets/memories/memory-16.jpg',
+    'assets/memories/memory-17.jpg',
+    'assets/memories/memory-18.jpg',
+  ];
+
   componentDidMount() {
     this._sayTimer = setInterval(() => {
-      if (this.state.screen !== 'seal') return;
+      if (this.state.screen !== 'seal' || this.state.openLove) return;
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduced) {
         this.setState(s => ({ sayIdx: (s.sayIdx + 1) % this.SAYINGS.length }));
@@ -357,19 +375,190 @@ class Component extends DCLogic {
         this.setState(s => ({ sayIdx: (s.sayIdx + 1) % this.SAYINGS.length, sayFade: false }));
       }, 320);
     }, 3800);
+
+    this._carouselTimer = setInterval(() => {
+      if (this.state.screen !== 'ask' || this.state.carouselPaused) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      this.setState(s => ({ carouselIdx: s.carouselIdx + 1 }));
+    }, 2800);
   }
 
   componentWillUnmount() {
     clearInterval(this._sayTimer);
+    clearInterval(this._carouselTimer);
   }
 
   openEnvelope = () => {
-    if (this.state.opening) return;
+    if (this.state.opening || this.state.openLove) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) { this.setState({ screen: 'ask' }); return; }
-    this.setState({ opening: true });
-    setTimeout(() => this.setState({ screen: 'ask', opening: false }), 1250);
+    if (reduced) {
+      this.setState({ openLove: true, opening: true });
+      setTimeout(() => this.setState({ screen: 'ask', opening: false, openLove: false }), 900);
+      return;
+    }
+    this.setState({ opening: true, openLove: true });
+    setTimeout(() => this.setState({ screen: 'ask', opening: false, openLove: false }), 1600);
   };
+
+  carouselPrev = () => {
+    this.setState(s => ({ carouselIdx: s.carouselIdx - 1, carouselPaused: true }));
+    clearTimeout(this._pauseTimer);
+    this._pauseTimer = setTimeout(() => this.setState({ carouselPaused: false }), 5000);
+  };
+
+  carouselNext = () => {
+    this.setState(s => ({ carouselIdx: s.carouselIdx + 1, carouselPaused: true }));
+    clearTimeout(this._pauseTimer);
+    this._pauseTimer = setTimeout(() => this.setState({ carouselPaused: false }), 5000);
+  };
+
+  onCarouselTouchStart = (e) => {
+    const t = e.touches ? e.touches[0] : e;
+    this._touchX = t.clientX;
+  };
+
+  onCarouselTouchEnd = (e) => {
+    if (this._touchX == null) return;
+    const t = e.changedTouches ? e.changedTouches[0] : e;
+    const dx = t.clientX - this._touchX;
+    this._touchX = null;
+    if (Math.abs(dx) < 36) return;
+    if (dx < 0) this.carouselNext();
+    else this.carouselPrev();
+  };
+
+  shortestOffset(i, idx, n) {
+    let d = i - idx;
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return d;
+  }
+
+  buildCarousel() {
+    const n = this.GALLERY.length;
+    const idx = ((this.state.carouselIdx % n) + n) % n;
+    const cardW = 168;
+    const cardH = 224;
+    const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const her = this.props.herName || 'her';
+    const me = this.props.myName || 'me';
+    const transition = reduced ? 'none' : 'transform .7s cubic-bezier(.4,0,.2,1), opacity .7s ease, filter .7s ease';
+
+    const slides = this.GALLERY.map((src, i) => {
+      const d = this.shortestOffset(i, idx, n);
+      const abs = Math.abs(d);
+      const hidden = abs > 3;
+      const x = d * 78;
+      const rot = d * -42;
+      const z = abs === 0 ? 140 : 40 - abs * 55;
+      const scale = abs === 0 ? 1 : Math.max(0.72, 1 - abs * 0.1);
+      return React.createElement(
+        'div',
+        {
+          key: 'mem-' + i,
+          'aria-hidden': abs !== 0,
+          style: {
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            width: cardW + 'px',
+            height: cardH + 'px',
+            marginLeft: -(cardW / 2) + 'px',
+            marginTop: -(cardH / 2) + 'px',
+            transform: 'translateX(' + x + 'px) translateZ(' + z + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')',
+            border: abs === 0 ? '2px solid var(--color-accent)' : '2px solid var(--color-text)',
+            overflow: 'hidden',
+            background: 'var(--color-text)',
+            opacity: hidden ? 0 : abs === 0 ? 1 : Math.max(0.35, 1 - abs * 0.22),
+            filter: abs === 0 ? 'none' : 'brightness(.78)',
+            pointerEvents: abs === 0 ? 'auto' : 'none',
+            zIndex: 10 - abs,
+            transition,
+            boxShadow: abs === 0 ? '0 18px 36px rgba(0,0,0,.22)' : '0 8px 18px rgba(0,0,0,.12)',
+          },
+        },
+        React.createElement('img', {
+          src,
+          alt: her + ' and ' + me + ' — memory ' + (i + 1),
+          loading: abs <= 1 ? 'eager' : 'lazy',
+          draggable: false,
+          style: { display: 'block', width: '100%', height: '100%', objectFit: 'cover' },
+        })
+      );
+    });
+
+    const btnStyle =
+      'font-family:var(--font-heading); font-weight:800; font-size:clamp(14px,3.4vw,16px);' +
+      'background:transparent; color:var(--color-text); border:2px solid var(--color-divider);' +
+      'padding:10px 16px; cursor:pointer; min-width:48px;';
+
+    return React.createElement(
+      'div',
+      {
+        role: 'region',
+        'aria-roledescription': 'carousel',
+        'aria-label': 'Photo memories carousel',
+        onTouchStart: this.onCarouselTouchStart,
+        onTouchEnd: this.onCarouselTouchEnd,
+        style: { userSelect: 'none', touchAction: 'pan-y' },
+      },
+      React.createElement(
+        'div',
+        {
+          style: {
+            position: 'relative',
+            width: '100%',
+            height: 'min(300px, 72vw)',
+            perspective: '900px',
+            perspectiveOrigin: '50% 50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+          },
+        },
+        React.createElement(
+          'div',
+          {
+            style: {
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              transformStyle: 'preserve-3d',
+            },
+          },
+          slides
+        )
+      ),
+      React.createElement(
+        'div',
+        {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            marginTop: '18px',
+          },
+        },
+        React.createElement('button', { type: 'button', onClick: this.carouselPrev, 'aria-label': 'Previous memory', style: btnStyle }, '←'),
+        React.createElement(
+          'div',
+          {
+            style: {
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 800,
+              fontSize: 'clamp(13px,3.2vw,15px)',
+              letterSpacing: '.04em',
+              color: 'var(--color-neutral-700)',
+            },
+          },
+          (idx + 1) + ' / ' + n
+        ),
+        React.createElement('button', { type: 'button', onClick: this.carouselNext, 'aria-label': 'Next memory', style: btnStyle }, '→')
+      )
+    );
+  }
 
   TAUNTS = [
     "Are you sure? 👀",
@@ -505,6 +694,8 @@ class Component extends DCLogic {
 
   renderVals() {
     const isYes = this.state.screen === 'yes';
+    const isAsk = this.state.screen === 'ask';
+    const openLove = this.state.openLove;
     let confetti = [], hearts = [];
     if (isYes) {
       if (!this._c) this._c = this.buildConfetti();
@@ -517,20 +708,26 @@ class Component extends DCLogic {
     }
     return {
       isSeal: this.state.screen === 'seal',
-      isAsk: this.state.screen === 'ask',
+      isAsk,
       isNo: this.state.screen === 'no',
       isYes,
       openEnvelope: this.openEnvelope,
-      loveSaying: this.SAYINGS[this.state.sayIdx],
-      sayStyle:
-        'margin:clamp(22px,5vw,34px) auto 0; min-height:2.7em; max-width:24ch;' +
-        'font-family:var(--font-heading); font-weight:800; color:var(--color-text);' +
-        'font-size:clamp(18px,4.8vw,25px); line-height:1.32; letter-spacing:-.01em;' +
-        'transition:opacity .32s ease; opacity:' + (this.state.sayFade ? '0' : '1') + ';',
+      loveSaying: openLove ? 'I love you' : this.SAYINGS[this.state.sayIdx],
+      openHint: openLove ? 'Opening…' : 'Tap to open ↑',
+      sayStyle: openLove
+        ? 'margin:clamp(22px,5vw,34px) auto 0; min-height:2.7em; max-width:18ch;' +
+          'font-family:var(--font-heading); font-weight:900; color:var(--color-accent);' +
+          'font-size:clamp(2rem,8vw,3.2rem); line-height:1.1; letter-spacing:.04em;' +
+          'animation:om-love-pop .7s cubic-bezier(.2,.8,.3,1.2) both;'
+        : 'margin:clamp(22px,5vw,34px) auto 0; min-height:2.7em; max-width:24ch;' +
+          'font-family:var(--font-heading); font-weight:800; color:var(--color-text);' +
+          'font-size:clamp(18px,4.8vw,25px); line-height:1.32; letter-spacing:-.01em;' +
+          'transition:opacity .32s ease; opacity:' + (this.state.sayFade ? '0' : '1') + ';',
       ...this.envelopeStyles(),
       noStyle: this.state.noStyle || '',
-      showTaunt: this.state.screen === 'ask' && this.state.dodges > 0,
+      showTaunt: isAsk && this.state.dodges > 0,
       taunt: this.state.taunt,
+      carousel: isAsk ? this.buildCarousel() : null,
       confetti, hearts,
       onYes: this.onYes,
       onNoClick: this.onNoClick,
